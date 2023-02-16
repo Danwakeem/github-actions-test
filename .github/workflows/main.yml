@@ -17,6 +17,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
+      REF_TYPE: ${{ github.ref_type }}
       ENV_SITE: ${{ startsWith(github.ref_type, 'console-ui') && 'dev' || github.event.inputs.stage == 'prod' && 'prod' || 'pre' }}
     steps:
       - uses: actions/checkout@v2
@@ -26,4 +27,4 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - name: Test
         run: |
-          echo "$ENV_SITE"
+          echo "$ENV_SITE, $REF_TYPE"
