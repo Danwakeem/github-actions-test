@@ -50,7 +50,7 @@ jobs:
           failBuild: false  
         id: version_check
       - name: Release Version
-        if: ${{ steps.version_check.outputs.versionChanged }}
+        if: ${{ !steps.version_check.outputs.versionChanged }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUT: ${{ toJson(steps.version_check.outputs) }}
