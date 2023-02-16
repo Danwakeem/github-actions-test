@@ -40,8 +40,11 @@ jobs:
           echo "$ENV_SITE, $REF_TYPE"
       - uses: google-github-actions/release-please-action@v3
         if: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release-type: node
           path: frontends/console-ui
           monorepo-tags: true
+          command: github-release
           package-name: console-ui
