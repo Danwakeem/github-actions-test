@@ -45,7 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release-type: node
-          path: frontends/console-ui
           monorepo-tags: true
           command: github-release
           package-name: console-ui
