@@ -52,4 +52,7 @@ jobs:
         if: ${{ steps.version_check.outputs.versionChanged }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
+          OUT: ${{ json(steps.version_check.outputs) }}
+        run: |
+          echo "$OUT"
+          gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
