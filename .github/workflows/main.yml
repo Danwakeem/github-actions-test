@@ -1,0 +1,33 @@
+name: Console UI Deploy
+
+on:
+  push:
+    tags:
+      - 'console-ui*'
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage to deploy to - IE: pre / dev / prod"
+        required: true
+        default: "prod"
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTION_NAME: ${{ github.event_name }}
+#     env:
+#       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#       NETLIFY_SITE_ID: ${{ github.event.inputs.stage == 'prod' && '2af87523-a3e8-4a43-b29a-1f03783fe2e7' || '535ed929-8b4d-4b67-8a07-b5b5af66a3fb' }}
+#       NETLIFY_DEPLOY_TO_PROD: true
+#       REACT_APP_HUBSPOT_ACCOUNT: ${{ github.event.inputs.stage == 'prod' && 2901603 || 21061695 }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: "https://npm.pkg.github.com"
+      - name: Test
+        run: echo "Val $GITHUB_ACTION_NAME. Today is $DAY_OF_WEEK!"
