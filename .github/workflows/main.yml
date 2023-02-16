@@ -52,6 +52,6 @@ jobs:
       - name: Release Version
         if: ${{ steps.version_check.outputs.versionChanged == 'true' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
