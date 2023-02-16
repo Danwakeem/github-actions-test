@@ -42,7 +42,7 @@ jobs:
       - name: Check Release Version
         uses: thebongy/version-check@v1
         with:
-          file: package.json
+          file: frontends/console-ui/package.json
           tagFormat: console-ui-v${version}
         id: version_check
       - name: tag major and minor versions
