@@ -17,8 +17,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      REF_TYPE: ${{ github.ref_type }}
-      ENV_SITE: ${{ startsWith(github.ref_type, 'console-ui') && 'dev' || github.event.inputs.stage == 'prod' && 'prod' || 'pre' }}
+      REF_TYPE: ${{ github.ref_name }}
+      ENV_SITE: ${{ startsWith(github.ref_name, 'console-ui') && 'dev' || github.event.inputs.stage == 'prod' && 'prod' || 'pre' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
