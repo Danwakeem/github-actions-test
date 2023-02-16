@@ -47,6 +47,7 @@ jobs:
         with:
           file: frontends/console-ui/package.json
           tagFormat: console-ui-v${version}
+          failBuild: false  
         id: version_check
       - name: Release Version
         if: ${{ steps.version_check.outputs.versionChanged }}
