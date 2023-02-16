@@ -7,7 +7,7 @@ on:
     branches: [main]
     paths:
       - "frontends/console-ui/**"
-      - ".github/workflows/console-ui.pr.yml"
+      - ".github/workflows/main.yml"
   workflow_dispatch:
     inputs:
       stage:
