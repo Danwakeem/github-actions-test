@@ -15,6 +15,9 @@ on:
         required: true
         default: "prod"
 
+permissions:
+  contents: write
+
 defaults:
   run:
     working-directory: ./frontends/console-ui
