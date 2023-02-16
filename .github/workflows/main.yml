@@ -45,9 +45,8 @@ jobs:
           file: frontends/console-ui/package.json
           tagFormat: console-ui-v${version}
         id: version_check
-      - name: tag major and minor versions
-        # if: ${{ steps.version_check.versionChanged }}
+      - name: Release Version
+        if: ${{ steps.version_check.outputs.versionChanged }}
         env:
-          CONTEXT_VAL: ${{ toJson(steps.version_check) }}
-        run: |
-          echo "$CONTEXT_VAL"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "console-ui-v$steps.version_check.outputs.rawVersion" --generate-notes
