@@ -39,6 +39,7 @@ jobs:
           echo "$GITHUB_CONTEXT"
           echo "$ENV_SITE, $REF_TYPE"
       - uses: google-github-actions/release-please-action@v3
+        id: release
         if: ${{ github.ref_name == 'main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,3 +49,9 @@ jobs:
           monorepo-tags: true
           command: github-release
           package-name: console-ui
+      - name: tag major and minor versions
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          CONTEXT_VAL: ${{ toJson(steps.release.outputs) }}
+        run: |
+          echo "$CONTEXT_VAL"
