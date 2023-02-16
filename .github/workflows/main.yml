@@ -26,5 +26,8 @@ jobs:
           node-version: '16.x'
           registry-url: "https://npm.pkg.github.com"
       - name: Test
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
+          echo "$GITHUB_CONTEXT"
           echo "$ENV_SITE, $REF_TYPE"
