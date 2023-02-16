@@ -5,12 +5,19 @@ on:
     tags:
       - 'console-ui*'
     branches: [main]
+    paths:
+      - "frontends/console-ui/**"
+      - ".github/workflows/console-ui.pr.yml"
   workflow_dispatch:
     inputs:
       stage:
         description: "Stage to deploy to - IE: pre / dev / prod"
         required: true
         default: "prod"
+
+defaults:
+  run:
+    working-directory: ./frontends/console-ui
 
 jobs:
   deploy:
@@ -31,3 +38,10 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
           echo "$ENV_SITE, $REF_TYPE"
+      - uses: google-github-actions/release-please-action@v3
+        if: ${{ github.ref_name == 'main' }}
+        with:
+          release-type: node
+          path: frontends/console-ui
+          monorepo-tags: console-ui
+          package-name: console-ui
