@@ -41,12 +41,15 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
           echo "$ENV_SITE, $REF_TYPE"
+      - run: git fetch --all --tags
+      - name: Check Release Version
+        uses: thebongy/version-check@v1
+        with:
+          file: frontends/console-ui/package.json
+          tagFormat: console-ui-v${version}
+        id: version_check
       - name: Release Version
+        if: ${{ steps.version_check.outputs.versionChanged }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          NEW_VERSION=`git diff -U0 ${{ github.event.before }} package.json | grep '"version": "' | tail -n 1 | grep -oE "[0-9]+\.[0-9]+\.[0-9]+"` || :
-          if [ -n "$NEW_VERSION" ] && [ $NEW_VERSION != "0.0.0" ];
-          then
-            gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
-          fi
+        run: gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
