@@ -50,10 +50,8 @@ jobs:
           failBuild: false  
         id: version_check
       - name: Release Version
-        if: ${{ steps.version_check.outputs.versionChanged }}
+        if: ${{ steps.version_check.outputs.versionChanged == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OUT: ${{ toJson(steps.version_check.outputs) }}
         run: |
-          echo "$OUT"
           gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
