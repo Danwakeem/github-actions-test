@@ -30,4 +30,8 @@ jobs:
           node-version: '16.x'
           registry-url: "https://npm.pkg.github.com"
       - name: Test
-        run: echo "Val $GITHUB_ACTION_NAME. Today is $DAY_OF_WEEK!"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+#         run: echo "Val $GITHUB_ACTION_NAME. Today is $DAY_OF_WEEK!"
