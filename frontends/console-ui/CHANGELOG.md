@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v1.0.0...console-ui-v1.0.1) (2023-02-17)
+
+
+### Bug Fixes
+
+* Better ([fd6cf22](https://github.com/Danwakeem/github-actions-test/commit/fd6cf220cbe84eced9d304e55b7f9dbaa7225dfd))
+
 ## [1.0.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v0.1.1...console-ui-v1.0.0) (2023-02-17)
 
 
