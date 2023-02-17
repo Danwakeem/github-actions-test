@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/Danwakeem/github-actions-test/compare/go-boy-v1.0.0...go-boy-v2.0.0) (2023-02-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Adding hair
+
+### Features
+
+* Added a name ([7e87026](https://github.com/Danwakeem/github-actions-test/commit/7e870262d5a79532dd9146ed0f8b7439be01462b))
+* Adding hair ([381f723](https://github.com/Danwakeem/github-actions-test/commit/381f72305d0ad49bbcc092cc4b9b0c6e13ed6a57))
+
+
+### Bug Fixes
+
+* Added missing file ([0fd2c22](https://github.com/Danwakeem/github-actions-test/commit/0fd2c22e85140b583c20dc7ad7b38391486ba85d))
+
 ## 1.0.0 (2023-02-17)
 
 
