@@ -54,3 +54,4 @@ jobs:
           monorepo-tags: true
           package-name: console-ui
           default-branch: plz
+          tag-separator: '-'
