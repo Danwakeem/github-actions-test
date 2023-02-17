@@ -46,7 +46,7 @@ jobs:
         id: release
         if: ${{ github.ref_name == 'plz' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release-type: node
           path: frontends/console-ui
