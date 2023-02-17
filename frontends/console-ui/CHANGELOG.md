@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v1.0.2...console-ui-v2.0.0) (2023-02-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* SC-456 Added return value and removed log ([#8](https://github.com/Danwakeem/github-actions-test/issues/8))
+
+### Features
+
+* SC-456 Added return value and removed log ([#8](https://github.com/Danwakeem/github-actions-test/issues/8)) ([ced0327](https://github.com/Danwakeem/github-actions-test/commit/ced0327d5e03b48919a8fa6fe5f8cf77202355f5))
+
+
+### Bug Fixes
+
+* SC-123 Removed POW ([6c46a72](https://github.com/Danwakeem/github-actions-test/commit/6c46a72da9784fc1dc27a7559e54f7765e402a2a))
+
 ## [1.0.2](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v1.0.1...console-ui-v1.0.2) (2023-02-17)
 
 
