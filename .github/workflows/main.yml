@@ -46,6 +46,7 @@ jobs:
         with:
           release-type: node
           path: frontends/console-ui
+          changelog-path: frontends/console-ui
           monorepo-tags: true
           package-name: console-ui
           default-branch: plz
