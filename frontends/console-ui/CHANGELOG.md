@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v2.0.0...console-ui-v2.1.0) (2023-02-17)
+
+
+### Features
+
+* SC-123 Added another blah ([#9](https://github.com/Danwakeem/github-actions-test/issues/9)) ([badff11](https://github.com/Danwakeem/github-actions-test/commit/badff11ac0c939add0ce97a3e934dde808fb5557))
+
+
+### Bug Fixes
+
+* Removed space ([#11](https://github.com/Danwakeem/github-actions-test/issues/11)) ([7fdd048](https://github.com/Danwakeem/github-actions-test/commit/7fdd048111547e5b47362bd7790e7e67fcae8428))
+
 ## [2.0.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v1.0.2...console-ui-v2.0.0) (2023-02-17)
 
 
