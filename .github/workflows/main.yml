@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'console-ui*'
-    branches: [main]
+    branches: [plz]
     paths:
       - "frontends/console-ui/**"
       - ".github/workflows/main.yml"
@@ -14,9 +14,6 @@ on:
         description: "Stage to deploy to - IE: pre / dev / prod"
         required: true
         default: "prod"
-
-permissions:
-  contents: write
 
 defaults:
   run:
@@ -41,17 +38,14 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
           echo "$ENV_SITE, $REF_TYPE"
-      - run: git fetch --all --tags
-      - name: Check Release Version
-        uses: thebongy/version-check@v1
-        with:
-          file: frontends/console-ui/package.json
-          tagFormat: console-ui-v${version}
-          failBuild: false  
-        id: version_check
-      - name: Release Version
-        if: ${{ steps.version_check.outputs.versionChanged == 'true' }}
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        if: ${{ github.ref_name == 'plz' }}
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
-        run: |
-          gh release create console-ui-v${{ steps.version_check.outputs.rawVersion }} --generate-notes
+        with:
+          release-type: node
+          path: frontends/console-ui
+          monorepo-tags: true
+          package-name: console-ui
+          default-branch: plz
