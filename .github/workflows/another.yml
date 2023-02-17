@@ -1,0 +1,56 @@
+name: Test
+
+on:
+  push:
+    tags:
+      - 'console-ui*'
+    branches: [plz]
+    paths:
+      - "services/test/**"
+      - ".github/workflows/another.yml"
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage to deploy to - IE: pre / dev / prod"
+        required: true
+        default: "prod"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+defaults:
+  run:
+    working-directory: ./services/test
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      REF_TYPE: ${{ github.ref_name }}
+      ENV_SITE: ${{ startsWith(github.ref_name, 'console-ui') && 'dev' || github.event.inputs.stage == 'prod' && 'prod' || 'pre' }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: "https://npm.pkg.github.com"
+      - name: Test
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          echo "$ENV_SITE, $REF_TYPE"
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        if: ${{ github.ref_name == 'plz' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release-type: node
+          path: services/test
+          monorepo-tags: true
+          package-name: test-service
+          default-branch: plz
+          tag-separator: '-'
