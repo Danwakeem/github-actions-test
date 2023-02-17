@@ -1,3 +1,3 @@
-const x = 'Blah Blah ';
+const x = 'Blah Blah';
 
 return x + 'alksdkjf';
