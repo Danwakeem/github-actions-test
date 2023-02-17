@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v2.1.0...console-ui-v2.1.1) (2023-02-17)
+
+
+### Bug Fixes
+
+* Updated x variable ([#13](https://github.com/Danwakeem/github-actions-test/issues/13)) ([6e5c062](https://github.com/Danwakeem/github-actions-test/commit/6e5c062bd058b2d36683c2c6bf75a0b348f939b6))
+
 ## [2.1.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v2.0.0...console-ui-v2.1.0) (2023-02-17)
 
 
