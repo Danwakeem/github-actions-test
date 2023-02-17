@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "Stage to deploy to - IE: pre / dev / prod"
+        description: "Stage to deploy to - IE: dev / prod"
         required: true
         default: "prod"
 
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REF_TYPE: ${{ github.ref_name }}
-      ENV_SITE: ${{ github.event.inputs.stage || 'pre' }}
+      ENV_SITE: ${{ github.event.inputs.stage || 'dev' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -50,7 +50,7 @@ jobs:
           monorepo-tags: true
           package-name: console-ui
           tag-separator: '-'
-      - name: Deploy UAT
+      - name: Deploy Prod
         if: ${{ steps.release.outputs.releases_created }}
-        run: echo "Deploying Dev"
+        run: echo "Deploying Prod"
 
