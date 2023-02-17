@@ -2,7 +2,7 @@ name: Console UI Deploy
 
 on:
   push:
-    branches: [plz]
+    branches: [main]
     paths:
       - "frontends/console-ui/**"
       - ".github/workflows/main.yml"
@@ -49,7 +49,6 @@ jobs:
           path: frontends/console-ui
           monorepo-tags: true
           package-name: console-ui
-          default-branch: plz
           tag-separator: '-'
       - name: Deploy UAT
         if: ${{ steps.release.outputs.releases_created }}

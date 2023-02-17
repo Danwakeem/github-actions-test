@@ -1,10 +1,8 @@
-name: Test
+name: Test Service Deploy
 
 on:
   push:
-    tags:
-      - 'console-ui*'
-    branches: [plz]
+    branches: [main]
     paths:
       - "services/test/**"
       - ".github/workflows/another.yml"
@@ -29,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REF_TYPE: ${{ github.ref_name }}
-      ENV_SITE: ${{ startsWith(github.ref_name, 'console-ui') && 'dev' || github.event.inputs.stage == 'prod' && 'prod' || 'pre' }}
+      ENV_SITE: ${{ github.event.inputs.stage || 'pre' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -44,13 +42,15 @@ jobs:
           echo "$ENV_SITE, $REF_TYPE"
       - uses: google-github-actions/release-please-action@v3
         id: release
-        if: ${{ github.ref_name == 'plz' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           release-type: node
           path: services/test
           monorepo-tags: true
-          package-name: test-service
-          default-branch: plz
+          package-name: console-ui
           tag-separator: '-'
+      - name: Deploy UAT
+        if: ${{ steps.release.outputs.releases_created }}
+        run: echo "Deploying Dev"
+
