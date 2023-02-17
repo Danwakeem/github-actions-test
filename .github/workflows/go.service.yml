@@ -1,0 +1,52 @@
+name: Go Service Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "services/go/**"
+      - ".github/workflows/go.service.yml"
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage to deploy to - IE: dev / prod"
+        required: true
+        default: "prod"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+defaults:
+  run:
+    working-directory: ./services/go
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      ENV_SITE: ${{ github.event.inputs.stage || 'dev' }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: "https://npm.pkg.github.com"
+      - name: Deploy
+        run: |
+          echo "$ENV_SITE"
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          release-type: simple
+          path: services/go
+          monorepo-tags: true
+          package-name: go-service
+          tag-separator: '-'
+      - name: Deploy Prod
+        if: ${{ steps.release.outputs.releases_created }}
+        run: echo "Deploying Prod"
+
