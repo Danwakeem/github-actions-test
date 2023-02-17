@@ -3,7 +3,7 @@ name: Console UI Deploy
 on:
   push:
     tags:
-      - 'console-ui*'
+      - 'console-ui:*'
     branches: [plz]
     paths:
       - "frontends/console-ui/**"
