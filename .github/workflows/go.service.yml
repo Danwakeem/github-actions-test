@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "services/go/**"
+      - "services/go-service/**"
       - ".github/workflows/go.service.yml"
   workflow_dispatch:
     inputs:
@@ -19,7 +19,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: ./services/go
+    working-directory: ./services/go-service
 
 jobs:
   deploy:
@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           release-type: simple
-          path: services/go
+          path: services/go-service
           monorepo-tags: true
           package-name: go-service
           tag-separator: '-'
