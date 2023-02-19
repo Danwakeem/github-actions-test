@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v2.1.1...console-ui-v2.2.0) (2023-02-17)
+
+
+### Features
+
+* Updates ([1f0ce85](https://github.com/Danwakeem/github-actions-test/commit/1f0ce85b9f3bcc233cc81b64480c7d6d51096763))
+
 ## [2.1.1](https://github.com/Danwakeem/github-actions-test/compare/console-ui-v2.1.0...console-ui-v2.1.1) (2023-02-17)
 
 
