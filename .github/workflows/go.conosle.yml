@@ -47,4 +47,6 @@ jobs:
           package-name: go/console
           tag-separator: '@'
           bump-minor-pre-major: true
+          release-search-depth: 5
+          bootstrap-sha: 5eae234e345eb13afaa977c6cd9995bba284aa31
           # bump-patch-for-minor-pre-major: true
