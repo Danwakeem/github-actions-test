@@ -49,4 +49,4 @@ jobs:
           bump-minor-pre-major: true
           bump-patch-for-minor-pre-major: true
           release-search-depth: 50
-          bootstrap-sha: 5eae234e345eb13afaa977c6cd9995bba284aa31
+          bootstrap-sha: 30445e68601a334d0633bf3743316966acfe5ad3
