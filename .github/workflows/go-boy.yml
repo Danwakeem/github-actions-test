@@ -48,5 +48,9 @@ jobs:
           tag-separator: '-'
       - name: Deploy Prod
         if: ${{ steps.release.outputs.releases_created }}
-        run: echo "Deploying Prod"
+        env:
+          OUTPUT: ${{join(steps.release.outputs.*, '\n')}}
+        run: |
+          echo "$OUTPUT"
+          echo "Deploying Prod"
 
