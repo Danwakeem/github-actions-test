@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/Danwakeem/github-actions-test/compare/go-boy-v2.0.0...go-boy-v2.0.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* Updated something.txt ([b9b4e23](https://github.com/Danwakeem/github-actions-test/commit/b9b4e23926e31469f2284e4bb2ae42a1f5ff1349))
+
 ## [2.0.0](https://github.com/Danwakeem/github-actions-test/compare/go-boy-v1.0.0...go-boy-v2.0.0) (2023-02-17)
 
 
