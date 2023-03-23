@@ -52,5 +52,5 @@ jobs:
           OUTPUT: ${{join(steps.release.outputs.*, '\n')}}
         run: |
           echo "$OUTPUT"
-          echo "Deploying Prod"
+          echo "Deploying Proddd"
 
