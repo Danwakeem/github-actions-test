@@ -4,7 +4,7 @@ on:
   workflow_call:
     working-directory:
       required: true
-      type: stringj
+      type: string
     inputs:
       stage:
         required: true
