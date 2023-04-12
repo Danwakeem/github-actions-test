@@ -1,0 +1,44 @@
+name: Validate Pull Request
+
+on:
+  pull_request:
+    branches: [other]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Resolve path filters
+        uses: dorny/paths-filter@v2
+        id: pathChanges
+        with:
+          filters: |
+            api1:
+              - 'services/api-1/**'
+            events:
+              - 'services/events/**'
+      - name: Set Path
+        id: setPath
+        run: |
+          if steps.pathChanges.outputs.api1 == 'true'; then
+              echo "PATH=services/api-1" >> $GITHUB_OUTPUT
+          elif NEXT-CONDITION-TO-TEST; then
+              echo "PATH=services/events" >> $GITHUB_OUTPUT
+          else
+            echo "PATH=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/setup-node@v3
+        if: steps.setPath.outputs.PATH != 'false'
+        working-directory: ${{ steps.setPath.outputs.PATH }}
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+      - name: Install dependencies
+        if: steps.setPath.outputs.PATH != 'false'
+        working-directory: ${{ steps.setPath.outputs.PATH }}
+        run: yarn install
+      - name: Lint
+        if: steps.setPath.outputs.PATH != 'false'
+        working-directory: ${{ steps.setPath.outputs.PATH }}
+        run: yarn lint
