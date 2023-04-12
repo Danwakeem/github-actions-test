@@ -1,0 +1,21 @@
+name: API 1 PR
+
+defaults:
+  run:
+    working-directory: services/api-1
+
+on:
+  pull_request:
+    branches: [other]
+    paths:
+      - "services/api-1/**"
+      - ".github/workflows/api-1.pr.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
+        with:
+          stage: dev
