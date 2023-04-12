@@ -18,6 +18,8 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
+      - name: Echo
+        run: echo "Working directory: ${{ inputs.working-directory }}"
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
