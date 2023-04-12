@@ -13,9 +13,6 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
-        with:
-          stage: dev
+    uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
+    with:
+      stage: dev
