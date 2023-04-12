@@ -33,6 +33,7 @@ jobs:
         with:
           node-version: '16.x'
           cache: 'yarn'
+          cache-dependency-path: ${{ steps.setPath.outputs.service }}/yarn.lock
       - name: Install dependencies
         if: steps.setPath.outputs.service != 'false'
         working-directory: ${{ steps.setPath.outputs.service }}
