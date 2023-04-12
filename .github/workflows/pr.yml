@@ -3,7 +3,7 @@ name: Validate Pull Request
 on:
   workflow_call:
     working-directory:
-      required: false
+      required: true
     inputs:
       stage:
         required: true
