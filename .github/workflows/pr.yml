@@ -22,22 +22,22 @@ jobs:
         id: setPath
         run: |
           if steps.pathChanges.outputs.api1 == 'true'; then
-              echo "PATH=services/api-1" >> $GITHUB_OUTPUT
+              echo "service=services/api-1" >> $GITHUB_OUTPUT
           elif NEXT-CONDITION-TO-TEST; then
-              echo "PATH=services/events" >> $GITHUB_OUTPUT
+              echo "service=services/events" >> $GITHUB_OUTPUT
           else
-            echo "PATH=false" >> $GITHUB_OUTPUT
+            echo "service=false" >> $GITHUB_OUTPUT
           fi
       - uses: actions/setup-node@v3
-        if: steps.setPath.outputs.PATH != 'false'
+        if: steps.setPath.outputs.service != 'false'
         with:
           node-version: '16.x'
           cache: 'yarn'
       - name: Install dependencies
-        if: steps.setPath.outputs.PATH != 'false'
-        working-directory: ${{ steps.setPath.outputs.PATH }}
+        if: steps.setPath.outputs.service != 'false'
+        working-directory: ${{ steps.setPath.outputs.service }}
         run: yarn install
       - name: Lint
-        if: steps.setPath.outputs.PATH != 'false'
-        working-directory: ${{ steps.setPath.outputs.PATH }}
+        if: steps.setPath.outputs.service != 'false'
+        working-directory: ${{ steps.setPath.outputs.service }}
         run: yarn lint
