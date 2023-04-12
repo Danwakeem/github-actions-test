@@ -21,7 +21,6 @@ jobs:
       - name: Set Path
         id: setPath
         run: |
-          echo "${{join(steps.pathChanges.outputs.*, '\n')}}"
           if ${{ steps.pathChanges.outputs.api1 }} == 'true'; then
               echo "service=services/api-1" >> $GITHUB_OUTPUT
           elif ${{ steps.pathChanges.outputs.events }} == 'true'; then
