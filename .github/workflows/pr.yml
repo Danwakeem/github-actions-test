@@ -30,7 +30,6 @@ jobs:
           fi
       - uses: actions/setup-node@v3
         if: steps.setPath.outputs.PATH != 'false'
-        working-directory: ${{ steps.setPath.outputs.PATH }}
         with:
           node-version: '16.x'
           cache: 'yarn'
