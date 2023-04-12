@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ github.event.inputs.working-directory }}
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/setup-node@v3
         with:
