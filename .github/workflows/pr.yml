@@ -3,9 +3,16 @@ name: Validate Pull Request
 on:
   workflow_call:
     inputs:
+      working-directory:
+        required: true
+        type: string
       stage:
         required: true
         type: string
+
+defaults:
+  run:
+    working-directory: ${{ inputs.working-directory }}
 
 jobs:
   validate:
