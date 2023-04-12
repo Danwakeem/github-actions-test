@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    working-directory: ${{ inputs.working-directory }}
+    working-directory: ${{ github.event.inputs.working-directory }}
 
 jobs:
   validate:
