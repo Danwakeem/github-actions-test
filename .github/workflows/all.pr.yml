@@ -1,0 +1,34 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [other]
+
+jobs:
+  validate:
+    name: "[Linux] Node.js v16: Unit Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Resolve path filters
+        uses: dorny/paths-filter@v2
+        id: pathChanges
+        with:
+          filters: |
+            api1:
+              - 'services/api-1/**'
+            events:
+              - 'services/events/**'
+      - name: Validate API 1
+        if: steps.pathChanges.outputs.api1 == 'true'
+        uses: ./.github/workflows/pr.yml@other
+        with:
+          stage: dev
+          working-directory: services/api-1
+      - name: Validate Events
+        if: steps.pathChanges.outputs.events == 'true'
+        uses: ./.github/workflows/pr.yml@other
+        with:
+          stage: dev
+          working-directory: services/events
