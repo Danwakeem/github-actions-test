@@ -34,7 +34,7 @@ jobs:
           node-version: '16.x'
           registry-url: "https://npm.pkg.github.com"
       - name: Deploy
-        if: ${{ startsWith(github.event.head_commit.message, 'chore(main): release') }}
+        if: ${{ startsWith(github.event.head_commit.message, 'chore:') }}
         run: |
           echo "$ENV_SITE"
           echo "${{ github.event.head_commit.message }}"
