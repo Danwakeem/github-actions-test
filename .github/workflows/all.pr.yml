@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Resolve path filters
         uses: dorny/paths-filter@v2
         id: pathChanges
@@ -20,11 +21,23 @@ jobs:
               - 'services/api-1/**'
             events:
               - 'services/events/**'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+          cache-dependency-path: |
+            **/yarn.lock
+
       - name: Validate API 1
         if: steps.pathChanges.outputs.api1 == 'true'
         uses: ./.github/actions/validate
-        # working-directory: services/api-1
+        with:
+          working-directory: services/api-1
+
       - name: Validate Events
         if: steps.pathChanges.outputs.events == 'true'
         uses: ./.github/actions/validate
-        # working-directory: services/events
+        with:
+          working-directory: services/events
