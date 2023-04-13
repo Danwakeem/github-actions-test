@@ -9,7 +9,11 @@ on:
 
 jobs:
   validate:
-    uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
-    working-directory: services/events
-    with:
-      stage: dev
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate
+        uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
+        with:
+          stage: dev
+        working-directory: services/events
