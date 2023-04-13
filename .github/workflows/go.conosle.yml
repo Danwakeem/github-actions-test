@@ -21,6 +21,9 @@ defaults:
   run:
     working-directory: ./services/go-console
 
+env:
+  RELEASE_PREFIX: "chore(main): release"
+
 jobs:
   deploy:
     name: Deploy
@@ -34,7 +37,7 @@ jobs:
           node-version: '16.x'
           registry-url: "https://npm.pkg.github.com"
       - name: Deploy
-        if: ${{ startsWith(github.event.head_commit.message, 'chore:') }}
+        if: ${{ startsWith(github.event.head_commit.message, $RELEASE_PREFIX) }}
         run: |
           echo "$ENV_SITE"
           echo "${{ github.event.head_commit.message }}"
