@@ -22,9 +22,9 @@ jobs:
               - 'services/events/**'
       - name: Validate API 1
         if: steps.pathChanges.outputs.api1 == 'true'
-        working-directory: services/api-1
         uses: ./.github/actions/validate
+        # working-directory: services/api-1
       - name: Validate Events
         if: steps.pathChanges.outputs.events == 'true'
-        working-directory: services/events
         uses: ./.github/actions/validate
+        # working-directory: services/events
