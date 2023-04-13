@@ -16,4 +16,4 @@ jobs:
     uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
     with:
       stage: dev
-      dir: services/api-1
+      working-directory: services/api-1
