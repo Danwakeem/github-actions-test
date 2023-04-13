@@ -2,7 +2,7 @@ name: Validate Pull Request
 
 on:
   workflow_call:
-    working-directory:
+    dir:
       required: true
     inputs:
       stage:
@@ -13,6 +13,9 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.dir }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
