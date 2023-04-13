@@ -24,18 +24,24 @@ jobs:
               - 'services/api-1/**'
             events:
               - 'services/events/**'
+      - name: Output
+        run: |
+          echo "api1=${{ steps.pathChanges.outputs.api1 }}" >> "$GITHUB_OUTPUT"
+          echo "events=${{ steps.pathChanges.outputs.events }}" >> "$GITHUB_OUTPUT"
+
   validate-api-1:
     name: "Validate API 1"
     needs: findChanges
-    if: needs.findChanges.outputs.output1 == 'true'
+    if: needs.findChanges.outputs.api1 == 'true'
     uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
     with:
       stage: dev
       working-directory: services/api-1
+
   validate-events:
     name: "Validate Events"
     needs: findChanges
-    if: needs.findChanges.outputs.output1 == 'true'
+    if: needs.findChanges.outputs.events == 'true'
     uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
     with:
       stage: dev
