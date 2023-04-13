@@ -8,11 +8,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: cd ${{ inputs.working-directory }}
-      shell: bash
     - name: Install dependencies
+      working-directory: ${{ inputs.working-directory }}
       shell: bash
       run: yarn install
     - name: Lint
+      working-directory: ${{ inputs.working-directory }}
       shell: bash
       run: yarn lint
