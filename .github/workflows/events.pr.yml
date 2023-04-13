@@ -1,15 +1,15 @@
-name: API 1 PR
+name: Events PR
 
 on:
   pull_request:
     branches: [other]
     paths:
-      - "services/api-1/**"
-      - ".github/workflows/api-1.pr.yml"
+      - "services/events/**"
+      - ".github/workflows/events.pr.yml"
 
 jobs:
   validate:
     uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
-    working-directory: services/api-1
+    working-directory: services/events
     with:
       stage: dev
