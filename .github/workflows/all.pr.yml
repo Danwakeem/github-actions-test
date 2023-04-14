@@ -5,12 +5,16 @@ on:
     branches: [other]
 
 jobs:
-  validate:
-    name: "[Linux] Node.js v16: Unit Tests"
+  findChanges:
+    name: "Find Changes"
     runs-on: ubuntu-latest
+    outputs:
+      api1: ${{ steps.pathChanges.outputs.api1 }}
+      events: ${{ steps.pathChanges.outputs.events }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Resolve path filters
         uses: dorny/paths-filter@v2
         id: pathChanges
@@ -20,15 +24,25 @@ jobs:
               - 'services/api-1/**'
             events:
               - 'services/events/**'
-      - name: Validate API 1
-        if: steps.pathChanges.outputs.api1 == 'true'
-        uses: ./.github/workflows/pr.yml@other
-        with:
-          stage: dev
-          working-directory: services/api-1
-      - name: Validate Events
-        if: steps.pathChanges.outputs.events == 'true'
-        uses: ./.github/workflows/pr.yml@other
-        with:
-          stage: dev
-          working-directory: services/events
+      - name: Output
+        run: |
+          echo "api1=${{ steps.pathChanges.outputs.api1 }}" >> "$GITHUB_OUTPUT"
+          echo "events=${{ steps.pathChanges.outputs.events }}" >> "$GITHUB_OUTPUT"
+
+  validate-api-1:
+    name: "Validate API 1"
+    needs: findChanges
+    if: needs.findChanges.outputs.api1 == 'true'
+    uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
+    with:
+      stage: dev
+      working-directory: services/api-1
+
+  validate-events:
+    name: "Validate Events"
+    needs: findChanges
+    if: needs.findChanges.outputs.events == 'true'
+    uses: danwakeem/github-actions-test/.github/workflows/pr.yml@other
+    with:
+      stage: dev
+      working-directory: services/api-1
