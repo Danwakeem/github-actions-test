@@ -8,9 +8,7 @@ jobs:
   findChanges:
     name: "Find Changes"
     runs-on: ubuntu-latest
-    outputs:
-      api1: ${{ steps.pathChanges.outputs.api1 }}
-      events: ${{ steps.pathChanges.outputs.events }}
+    outputs: ${{ steps.pathChanges.outputs }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,10 +22,6 @@ jobs:
               - 'services/api-1/**'
             events:
               - 'services/events/**'
-      - name: Output
-        run: |
-          echo "api1=${{ steps.pathChanges.outputs.api1 }}" >> "$GITHUB_OUTPUT"
-          echo "events=${{ steps.pathChanges.outputs.events }}" >> "$GITHUB_OUTPUT"
 
   validate-api-1:
     name: "Validate API 1"
